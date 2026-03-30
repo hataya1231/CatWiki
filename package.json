@@ -20,6 +20,7 @@
     "@astrojs/sitemap": "^3.7.1",
     "@fancyapps/ui": "^6.1.13",
     "astro": "^6.0.8",
+    "pnpm": "^10.33.0",
     "smartypants": "^0.2.2",
     "typescript": "^5.9.3"
   },
