@@ -4,7 +4,8 @@ import "~/styles/base.css";
 
 import smartypants from "smartypants";
 
-const siteName = "Astro Photo Grid";
+//ページ名
+const siteName = "Cat's wiki";
 
 export interface Props {
   title: string;
@@ -21,7 +22,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageTitle = Astro.url.pathname === "/" ? title : `${title} · ${siteName}`;
 ---
 
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
