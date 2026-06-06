@@ -3,9 +3,19 @@ import { Image } from "astro:assets";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  "../images/*.{jpg,jpeg,png,webp}",
-);
+// 1. microCMSクライアントと型定義をインポート
+import { client, type Blog } from "../microcms";
+
+// 2. microCMSからAPI経由でデータを取得
+const response = await client.get({ 
+  endpoint: "blogs",
+  queries: { limit: 50 } 
+});
+
+const blogs: Blog[] = response.contents;
+
+// 3. 画像が登録されている記事だけに絞り込む
+const galleryItems = blogs.filter(blog => blog.eyecatch);
 ---
 
 <BaseLayout
@@ -14,22 +24,25 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 >
   <section class="justified-gallery" id="photoswipe">
     {
-      Object.entries(images).map(async ([_path, image], index) => {
-        const { default: imageData } = await image();
+      galleryItems.map((blog, index) => {
+        const imageData = blog.eyecatch!; // フィルター済みなので必ず存在
+        
         return (
           <a
-            style={`--width: ${imageData.width}; --height: ${imageData.height};`}
-            href={imageData.src}
+            style={{ "--width": String(imageData.width), "--height": String(imageData.height) }}
+            href={imageData.url}
             target="_blank"
             data-fancybox="gallery"
+            data-caption={blog.title}
           >
-            <Image
-              format="webp"
-              src={imageData}
-              alt=""
-              height={400}
-              loading={index < 20 ? "eager" : "lazy"}
-            />
+          <Image
+            format="webp"
+            src={imageData.url}
+            alt={blog.title || "ギャラリー画像"} 
+            width={imageData.width} 
+            height={imageData.height} 
+            loading={index < 20 ? "eager" : "lazy"}
+          />
           </a>
         );
       })
@@ -38,7 +51,8 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 </BaseLayout>
 
 <script>
-  import { Fancybox } from "@fancyapps/ui/dist/fancybox/";
+  /* 修正点3: インポートパスの末尾のスラッシュを削除 */
+  import { Fancybox } from "@fancyapps/ui/dist/fancybox";
 
   Fancybox.bind("[data-fancybox]", {
     theme: "auto",
@@ -63,6 +77,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 </script>
 
 <style>
+  /* 既存のスタイル（変更なし） */
   .justified-gallery {
     --padding: max(2.5vw, 12px);
     --space: max(2.5vw, 12px);
