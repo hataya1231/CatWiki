@@ -21,8 +21,8 @@ importers:
         specifier: ^6.4.3
         version: 6.4.3(@types/node@25.0.9)(jiti@2.4.2)(rollup@4.61.0)(yaml@2.9.0)
       pnpm:
-        specifier: ^10.33.0
-        version: 10.33.0
+        specifier: ^11.5.2
+        version: 11.5.2
       smartypants:
         specifier: ^0.2.2
         version: 0.2.2
@@ -1606,9 +1606,9 @@ packages:
     resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
     engines: {node: '>=12'}
 
-  pnpm@10.33.0:
-    resolution: {integrity: sha512-EFaLtKavtYyes2MNqQzJUWQXq+vT+rvmc58K55VyjaFJHp21pUTHatjrdXD1xLs9bGN7LLQb/c20f6gjyGSTGQ==}
-    engines: {node: '>=18.12'}
+  pnpm@11.5.2:
+    resolution: {integrity: sha512-ccYx44IGbvwlYl1c8CkHXeB7YbN/bic1D72Esb2lhkyMGWetwoB3a0XDCnFcA1mjvgj+9C1bsJ4rmQKZeWkpFg==}
+    engines: {node: '>=22.13'}
     hasBin: true
 
   postcss-html@1.7.0:
@@ -3958,7 +3958,7 @@ snapshots:
 
   picomatch@4.0.4: {}
 
-  pnpm@10.33.0: {}
+  pnpm@11.5.2: {}
 
   postcss-html@1.7.0:
     dependencies:
