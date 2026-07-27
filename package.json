@@ -22,7 +22,7 @@
     "astro": "^6.4.3",
     "pnpm": "^11.5.2",
     "smartypants": "^0.2.2",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.16",
